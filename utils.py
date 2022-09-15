@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import networkx as nx
 from sklearn.metrics import confusion_matrix
-from sklearn.utils.linear_assignment_ import linear_assignment
+from scipy.optimize import linear_sum_assignment as linear_assignment
 import matplotlib.pyplot as plt
 
 import pandas as pd
@@ -64,7 +64,7 @@ def load_graph(min_num_nodes=10, name='ENZYMES'):
     #print(all_nodes)
     plt.hist(all_nodes)
     plt.show()
-    return graphs
+    return graphs#list of adj matrixes. The lenght of the list is the number of subgraphs
 
 def kmeans_dist(dist, num_clusters=2):
     w,v = torch.eig(dist,eigenvectors=True)
@@ -200,3 +200,11 @@ def data_simulation(graphons, number_of_graphs=10, start=100, stop=1000):
     print('graphs generated', len(graphs))
     print('true labels ', labels)
     return graphs, labels
+
+
+
+if __name__ == "__main__":
+    graphs = load_graph(min_num_nodes=10, name='REDDIT-BINARY')
+    a=1
+    
+    
